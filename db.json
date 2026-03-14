@@ -1,0 +1,12 @@
+{
+  "users": [
+    { "id": 1, "email": "gerente@empresa.com", "password": "123", "role": "gerente", "name": "Admin" },
+    { "id": 2, "email": "usuario@empresa.com", "password": "123", "role": "usuario", "name": "Empleado" }
+  ],
+  "projects": [
+    { "id": 1, "title": "Rediseño Web", "description": "Actualizar la interfaz principal" }
+  ],
+  "tasks": [
+    { "id": 1, "projectId": 1, "title": "Crear mockups", "status": "pendiente", "assignedTo": 2 }
+  ]
+}
