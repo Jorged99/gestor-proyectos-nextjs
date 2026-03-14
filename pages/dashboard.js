@@ -1,6 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
+
+// 1. Datos simulados de proyectos
+const MOCK_PROJECTS = [
+  { id: 1, title: "Rediseño Web", description: "Actualizar la interfaz principal" },
+  { id: 2, title: "Migración a la Nube", description: "Mover bases de datos a AWS" }
+];
 
 export default function Dashboard() {
   const { user, logout } = useContext(AuthContext);
@@ -8,10 +13,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (user) {
-      // Cargar proyectos desde el JSON Server
-      axios.get('http://localhost:3001/projects')
-        .then(res => setProjects(res.data))
-        .catch(err => console.error(err));
+      // 2. Cargamos los datos simulados en lugar de usar Axios
+      setProjects(MOCK_PROJECTS);
     }
   }, [user]);
 
@@ -20,8 +23,12 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <header className="flex justify-between items-center mb-8 bg-white p-4 rounded shadow">
-        <h1 className="text-2xl font-bold text-gray-800">Panel de {user.role === 'gerente' ? 'Gerencia' : 'Usuario'}</h1>
-        <button onClick={logout} className="text-red-500 hover:text-red-700 font-semibold">Cerrar Sesión</button>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Panel de {user.role === 'gerente' ? 'Gerencia' : 'Usuario'}
+        </h1>
+        <button onClick={logout} className="text-red-500 hover:text-red-700 font-semibold">
+          Cerrar Sesión
+        </button>
       </header>
 
       <main>
