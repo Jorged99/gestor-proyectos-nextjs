@@ -37,3 +37,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Pasos para subir a GitHub
+
+##1-clonar repo
+git clone https://github.com/Jorged99/sistema-gestion-de-proyectos
+
+##2- luego vamos a la carpeta 
+cd gestor-proyectos-nextjs
+
+##3- Instalar dependencias
+npm install
+
+##4- Correr en local
+npm run dev
+
+##5. abrir proyecto
+
+code .
+
+##6 Nos colocamos en la rama deseada
+git branch
+
+git fetch
+
+git checkout jorge-Alberto-Diaz
+
+##7 Nos identificamos en git antes de mandar datos
+git config --global user.name "Nombre"
+git config --global user.email "@correo.com"
+
+##8. Hacemos nuestro primer commit 
+git add .
+
+git commit -m "cambios que hice"
+
+git push -u origin Jorge-Alberto-Diaz
