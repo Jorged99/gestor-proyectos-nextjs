@@ -20,7 +20,7 @@ abrir  en tu navegador cuando aparezca [http://localhost:3000](http://localhost:
 ## Pasos para subir a GitHub
 
 ## 1-clonar repo
-git clone https://github.com/Jorged99/sistema-gestion-de-proyectos
+git clone https://github.com/Jorged99/gestor-proyectos-nextjs
 
 ## 2- luego vamos a la carpeta 
 cd gestor-proyectos-nextjs
