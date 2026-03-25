@@ -1,39 +1,45 @@
 import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { loginRequest, registerRequest } from '../lib/api';
 
 export const AuthContext = createContext();
 
-// Nuestros datos simulados para que funcione en Vercel
-const MOCK_USERS = [
-  { id: 1, email: "gerente@empresa.com", password: "123", role: "gerente", name: "Admin" },
-  { id: 2, email: "usuario@empresa.com", password: "123", role: "usuario", name: "Empleado" }
-];
+// Rutas públicas que no requieren autenticación
+const PUBLIC_PATHS = ['/login', '/register', '/'];
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const router = useRouter();
 
+  // Recuperar sesión guardada en localStorage al iniciar
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-    } else if (router.pathname !== '/login') {
-      router.push('/login');
     }
+    setAuthLoading(false);
   }, []);
 
-  const login = (email, password) => {
-    const loggedUser = MOCK_USERS.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (loggedUser) {
-      setUser(loggedUser);
-      localStorage.setItem('user', JSON.stringify(loggedUser));
-      router.push('/dashboard');
-    } else {
-      alert('Credenciales incorrectas');
+  // Protección de rutas: redirigir si no está autenticado
+  useEffect(() => {
+    if (!authLoading && !user && !PUBLIC_PATHS.includes(router.pathname)) {
+      router.push('/login');
     }
+  }, [authLoading, user, router.pathname]);
+
+  // Login usando axios contra la API /api/auth/login
+  const login = async (email, password) => {
+    const res = await loginRequest(email, password);
+    setUser(res.data);
+    localStorage.setItem('user', JSON.stringify(res.data));
+    router.push('/dashboard');
+  };
+
+  // Registro usando axios contra la API /api/auth/register
+  const register = async (name, email, password, role) => {
+    await registerRequest(name, email, password, role);
+    router.push('/login');
   };
 
   const logout = () => {
@@ -43,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout, authLoading }}>
       {children}
     </AuthContext.Provider>
   );
