@@ -1,12 +1,47 @@
 {
   "users": [
-    { "id": 1, "email": "gerente@empresa.com", "password": "123", "role": "gerente", "name": "Admin" },
-    { "id": 2, "email": "usuario@empresa.com", "password": "123", "role": "usuario", "name": "Empleado" }
+    {
+      "id": 1,
+      "email": "gerente@empresa.com",
+      "password": "123",
+      "role": "gerente",
+      "name": "Admin"
+    },
+    {
+      "id": 2,
+      "email": "usuario@empresa.com",
+      "password": "123",
+      "role": "usuario",
+      "name": "Empleado"
+    }
   ],
   "projects": [
-    { "id": 1, "title": "Rediseño Web", "description": "Actualizar la interfaz principal" }
+    {
+      "id": 1,
+      "title": "Rediseño Web",
+      "description": "Actualizar la interfaz principal"
+    },
+    {
+      "id": 2,
+      "title": "Informatica",
+      "description": "Puntos de red",
+      "estado": "Pendiente"
+    }
   ],
   "tasks": [
-    { "id": 1, "projectId": 1, "title": "Crear mockups", "status": "pendiente", "assignedTo": 2 }
+    {
+      "id": 1,
+      "projectId": 1,
+      "title": "Crear mockups",
+      "status": "Completado",
+      "assignedTo": 2
+    },
+    {
+      "id": 2,
+      "title": "Informatica",
+      "projectId": 2,
+      "assignedTo": 2,
+      "status": "En Progreso"
+    }
   ]
 }
