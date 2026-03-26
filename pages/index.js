@@ -1,17 +1,28 @@
-import Link from 'next/link';
+import { useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Home() {
+  const router = useRouter();
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Tan pronto como la página carga, tomamos una decisión rápida:
+    if (user) {
+      // Si ya tiene sesión, va directo a sus proyectos
+      router.push('/dashboard');
+    } else {
+      // Si no tiene sesión, va directo a loguearse
+      router.push('/login');
+    }
+  }, [user, router]);
+
+  // Mientras ocurre la redirección (toma una fracción de segundo), 
+  // mostramos un fondo limpio para que no parpadee nada feo.
   return (
-    <div className="flex flex-col h-screen items-center justify-center bg-gray-50">
-      <div className="text-center bg-white p-10 rounded-lg shadow-md max-w-md w-full border-t-4 border-blue-600">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Gestor de Proyectos</h1>
-        <p className="text-gray-600 mb-8">
-          Bienvenido. Administra tus proyectos y tareas de manera eficiente y centralizada.
-        </p>
-        
-        <Link href="/login" className="inline-block w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 transition-colors">
-          Ir a Iniciar Sesión
-        </Link>
+    <div className="h-screen flex items-center justify-center bg-gray-50">
+      <div className="animate-pulse text-blue-600 font-semibold">
+        Cargando sistema...
       </div>
     </div>
   );
